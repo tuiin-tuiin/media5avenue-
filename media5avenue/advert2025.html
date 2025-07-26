@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campaign Materials Discounts</title>
+  <link rel="stylesheet" href="advert2025.css" />
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+</head>
+<body>
+
+  
+  
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query").toLowerCase();
+    const resultsDiv = document.getElementById("results");
+
+    const pages = [
+      { title: "Home", url: "index.html", keywords: "home welcome media5" },
+      { title: "About", url: "about.html", keywords: "about team company" },
+      { title: "Projects", url: "projects.html", keywords: "projects portfolio work" },
+      { title: "Profile", url: "profile.html", keywords: "profile account user" },
+      {title: "Gallery",  url: "lux.html",   keywords: "gallery images photos"},
+    ];
+
+    const filtered = pages.filter(p =>
+      p.keywords.toLowerCase().includes(query)
+    );
+
+    if (filtered.length > 0) {
+      filtered.forEach(p => {
+        const link = document.createElement('a');
+        link.href = p.url;
+        link.textContent = `Go to: ${p.title}`;
+        link.style.display = 'block';
+        resultsDiv.appendChild(link);
+      });
+    } else {
+      resultsDiv.textContent = "No results found.";
+    }
+  </script>
+
+  
+  <div class="container">
+    <header>
+      <h1><span class="year">2025</span> <span class="highlight">MEGA</span> DISCOUNTS</h1>
+      <p class="subtitle">CAMPAIGN MATERIALS</p>
+      <p class="tagline">QUALITY PRINTS @ LOWEST PRICES</p>
+    </header>
+
+    <section class="offers">
+      <div class="poster-type">
+        <h3>A0 POSTERS</h3>
+        <p>With a Frame – 28,000/-<br>No Frame – 20,000/-</p>
+      </div>
+      <div class="poster-type">
+        <h3>A1 POSTERS</h3>
+        <p>With a Frame – 21,000/-<br>No Frame – 14,000/-</p>
+      </div>
+      <div class="poster-type">
+        <h3>A2 POSTERS</h3>
+        <p>With a Frame – 16,000/-<br>No Frame – 10,000/-</p>
+      </div>
+
+      <div class="poster-type">
+        <h3>PVC BANNERS</h3>
+        <p>With Eyelets – 25,000/-<br>No Eyelets – 20,000/-<br>Per square metre</p>
+      </div>
+
+      <div class="poster-type">
+        <h3>A2 POSTERS (Bulk)</h3>
+        <p>2,000pcs – 5,000pcs: <strong>500/= UGX</strong><br>6,000pcs+: <strong>440/= UGX</strong></p>
+      </div>
+
+      <div class="poster-type">
+        <h3>A3 POSTERS</h3>
+        <p>2,000pcs – 5,000pcs: <strong>300/= UGX</strong><br>6,000pcs+: <strong>250/= UGX</strong></p>
+      </div>
+
+      <div class="poster-type">
+        <h3>A4 POSTERS</h3>
+        <p>2,000pcs – 10,000pcs: <strong>200/= UGX</strong><br>11,000pcs+: <strong>180/= UGX</strong></p>
+      </div>
+
+      <div class="poster-type">
+        <h3>VINYL STICKERS</h3>
+        <p>1,000pcs – 3,000pcs: <strong>300/= UGX</strong><br>3,001pcs+: <strong>250/= UGX</strong></p>
+      </div>
+    </section>
+
+    <section class="other-materials">
+      <h4>OTHER CAMPAIGN MATERIALS</h4>
+      <p>T-SHIRTS | CAPS | TEARDROPS | CALENDARS</p>
+      <p class="free-design">FREE DESIGN ON ALL PACKAGES</p>
+    </section>
+    <div id="back-home-btn" class="back-home-btn">
+ <a href="index.html" class="back-home-btn">
+    <i class="fas fa-home"></i> Back to Home Screen
+  </a>
+    </div>
+  <style>
+   div #back-home-btn{
+    
+      margin-left: 40%;
+      display: inline-block;
+      border-radius: 0 20px;
+      box-shadow: 0 0 20px rgb(0, 0, 0);
+      text-decoration: none;
+      padding: 10px;
+      font-size: 20px;
+      transition: transform ease-in-out 0.1s;
+    }
+    div #back-home-btn:hover{
+      box-sizing: 0 0 30px rgb(0, 60, 255);
+  transform: scale(1.1);
+    }
+    div a {
+      text-decoration: none;
+      color: white;
+    }
+    @media (max-width:768px) {
+      div #back-home-btn{
+        padding: 5px;
+        margin-left: 80px;
+      }
+    }
+  </style>
+    <footer>
+      <div class="logo">Media<span>5</span></div>
+      <p>ICT SOLUTIONS | GENERAL SUPPLIES | MARKETING | DESIGN | PRINT | BRANDING</p>
+      <div class="contact">
+        <p>Nasser Road | Digital Complex | Level 2 – Suite S-94</p>
+        <p>📞 +256 773 419980 | +256 704 907671</p>
+        <p>📧 media5fiveug@gmail.com</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

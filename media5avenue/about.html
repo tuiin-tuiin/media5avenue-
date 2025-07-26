@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Media5</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="footernav.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    
+   
+    .section {
+      padding: 60px 30px;
+      max-width: 1100px;
+      margin: 50px auto;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #111827;
+    }
+
+    .section p {
+      margin-bottom: 20px;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .highlight-box {
+      background-color: #f3f4f6;
+      border-left: 6px solid #00bcd4;
+      padding: 20px;
+      margin: 30px 0;
+      border-radius: 6px;
+    }
+
+    .highlight-box h3 {
+      margin-bottom: 10px;
+    }
+
+    .services-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .services-list li {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .services-list li i {
+      margin-right: 12px;
+      color: #00bcd4;
+      font-size: 1.2rem;
+    }
+
+    
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      
+
+      .logo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .section {
+        margin: 30px 15px;
+        padding: 30px 20px;
+      }
+    }
+    .animated-title {
+  text-align: center;
+  margin-top: 50px;
+  animation: popIn 1s ease forwards, pulse 5s ease-in-out infinite;
+  opacity: 0;
+}
+
+.animated-title h1 {
+  font-size: 3rem;
+  color: #111827;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.floating-ad {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    text-align: center;
+    animation: bounce 2s infinite;
+    font-family: Arial, sans-serif;
+  }
+  
+  .floating-ad a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .ad-heading {
+    background: #ff0000;
+    padding: 5px 10px;
+    border-radius: 8px 8px 0 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  }
+  
+  .floating-ad img {
+    width: 140px; /* Adjust size */
+    height: auto;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  
+  /* Bounce animation */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  
+  .floating-ad:hover {
+    transform: scale(1.1);
+  }
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+  <header>
+    <div class="logo">
+      <img src="MEDIA_5_logo-3.png" alt="Media5 Logo" width="250px">
+    </div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="nav-links active">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+    
+  
+    <!-- Search button for mobile -->
+    <div class="search-toggle" id="search-toggle">
+      <i class="fas fa-search"></i>
+    </div>
+  
+    <!-- Search Box (Initially Hidden) -->
+    <div class="search-box" id="search-box">
+      <input type="text" placeholder="Search..." />
+      <i class="fas fa-search search-icon"></i> <!-- Search icon inside the input -->
+    </div>
+  </header>
+
+   <div class="floating-ad">
+    <a href="advert2025.html" >
+      <div class="ad-heading"><i class="fas fa-fire"></i> 2025 Mega Discounts <i class="fas fa-fire"></i></div>
+      <img src="mega.jpg" alt="Campaign Discounts">
+    </a>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query").toLowerCase();
+    const resultsDiv = document.getElementById("results");
+
+    const pages = [
+      { title: "Home", url: "index.html", keywords: "home welcome media5" },
+      { title: "About", url: "about.html", keywords: "about team company" },
+      { title: "Projects", url: "projects.html", keywords: "projects portfolio work" },
+      { title: "Profile", url: "profile.html", keywords: "profile account user" },
+      {title: "Gallery", url: "lux.html", keywords: "gallery images photos"},
+    ];
+
+    const filtered = pages.filter(p =>
+      p.keywords.toLowerCase().includes(query)
+    );
+
+    if (filtered.length > 0) {
+      filtered.forEach(p => {
+        const link = document.createElement('a');
+        link.href = p.url;
+        link.textContent = `Go to: ${p.title}`;
+        link.style.display = 'block';
+        resultsDiv.appendChild(link);
+      });
+    } else {
+      resultsDiv.textContent = "No results found.";
+    }
+  </script>
+
+
+
+  <div class="animated-title">
+    <h1>About Media5</h1>
+  </div>
+  
+
+  <section class="section fade-in">
+    <h2>Who We Are</h2>
+    <p>
+      <strong>Media5</strong> is a creative media company focused on delivering bold, impactful visuals. We specialize in <strong>graphic design</strong>, <strong>branding</strong>, <strong>large-format printing</strong>, and <strong>digital content creation</strong>.
+    </p>
+    <p>
+      Our mission is to help brands and businesses stand out with tailored visual solutions that speak clearly and leave a lasting impression.
+    </p>
+
+    <div class="highlight-box">
+      <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+      <p>
+        To empower creators and businesses with visual content that communicates their message with clarity, creativity, and confidence.
+      </p>
+    </div>
+
+    <div class="highlight-box fade-in">
+      <h3><i class="fas fa-briefcase"></i> What We Offer</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+    
+        <!-- Item 1 -->
+        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center;">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Logo Design" width="60" style="margin-bottom: 15px;">
+          <h4 style="margin-bottom: 10px;">Logo & Brand Identity</h4>
+          <p style="font-size: 0.95rem;">Custom logos, brand guidelines, and identity packages that represent your business perfectly.</p>
+        </div>
+    
+        <!-- Item 2 -->
+        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center;">
+          <img src="https://cdn-icons-png.flaticon.com/512/2922/2922542.png" alt="Large Format Printing" width="60" style="margin-bottom: 15px;">
+          <h4 style="margin-bottom: 10px;">Large Format Printing</h4>
+          <p style="font-size: 0.95rem;">Banners, backdrops, posters, and billboards printed with vibrant, long-lasting quality.</p>
+        </div>
+    
+        <!-- Item 3 -->
+        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center;">
+          <img src="https://cdn-icons-png.flaticon.com/512/4339/4339409.png" alt="Marketing Materials" width="60" style="margin-bottom: 15px;">
+          <h4 style="margin-bottom: 10px;">Marketing Materials</h4>
+          <p style="font-size: 0.95rem;">Flyers, brochures, business cards, and posters designed to communicate your message effectively.</p>
+        </div>
+    
+        <!-- Item 4 -->
+        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center;">
+          <img src="https://cdn-icons-png.flaticon.com/512/685/685686.png" alt="Labeling & Packaging" width="60" style="margin-bottom: 15px;">
+          <h4 style="margin-bottom: 10px;">Labeling & Packaging</h4>
+          <p style="font-size: 0.95rem;">Standout product packaging and custom labels that build your brand and attract attention.</p>
+        </div>
+    
+        <!-- Item 5 -->
+        <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center;">
+          <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Social Media Content" width="60" style="margin-bottom: 15px;">
+          <h4 style="margin-bottom: 10px;">Social Media Content</h4>
+          <p style="font-size: 0.95rem;">Eye-catching graphics and motion content optimized for all social media platforms.</p>
+        </div>
+    
+      </div>
+    </div>
+    
+
+    <p class="fade-in">
+      With Media5, you're not just getting a design — you're getting a creative partner who listens, understands, and delivers beyond expectation.
+    </p>
+  </section>
+ <!-- Scrolling client logos -->
+ <div class="logo-slider">
+  <div class="logo-track">
+    <img src="logo1.png" alt="Client 1" />
+    <img src="logo2.png" alt="Client 2" />
+    <img src="logo3.png" alt="Client 3" />
+    <img src="logo4.png" alt="Client 4" />
+    <img src="logo5.png" alt="Client 1" />
+    <img src="logo6.png" alt="Client 2" />
+    <img src="logo7.png" alt="Client 3" />
+    <img src="logo8.png" alt="Client 4" />
+    <img src="logo9.png" alt="Client 4" />
+    <img src="logo10.png" alt="Client 4" />
+    <img src="logo11.png" alt="Client 4" />
+    <img src="logo12.png" alt="Client 4" />
+    <img src="logo13.png" alt="Client 4" />
+    <img src="logo14.png" alt="Client 4" />
+    <img src="logo15.png" alt="Client 4" />
+  </div>
+</div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Column 1: Logo & About -->
+      <div class="footer-col about">
+        <img src="MEDIA_5_logo-2.png" alt="media 5 Logo" width="200px">
+        <p>Your creative partner in digital media and design solutions.</p>
+        <p>&copy; 2025 Media5. All rights reserved.</p>
+      </div>
+  
+      <!-- Column 2: Quick Links -->
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+  
+      <!-- Column 3: Contact Info -->
+      <div class="footer-col">
+        <h3>Contact</h3>
+        
+        <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Kampala, Nasser Road | Digital Complex | Level 2 – Suite S-94</li>
+            <li><i class="fas fa-phone-alt"></i> <a href="tel:+256773419980">+256 773 419980</a> | <a href="tel:+256704907671">+256 704 907671</a></li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:media5fiveug@gmail.com">media5fiveug@gmail.com</a></li>
+        </ul>
+      </div>
+  
+      <!-- Column 4: Social Media -->
+      <div class="footer-col">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://facebook.com/media5avenue" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com/media5avenue" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://linkedin.com/company/media5avenue" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://twitter.com/media5avenue" target="_blank"><i class="fab fa-twitter"></i></a>
+           <a href="https://youtube.com/@media5avenue" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+  
+   
+  </footer>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+<script src="main.js"></script>
+</body>
+
+
+</html>
