@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media5| Gallery</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="footernav.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  /* General Reset and Base */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  text-align: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter-buttons button {
+  padding: 10px 20px;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-buttons button:hover {
+  background-color: #090450;
+}
+
+/* Gallery Container */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Gallery Items */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+/* Category Tag */
+.category-tag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: #000000aa;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+/* Responsive for very small screens */
+@media (max-width: 500px) {
+  .gallery-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.filter-buttons button.active {
+  background-color: #b90101;
+  color: white;
+}
+/* Modal Container */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+  text-align: center;
+}
+
+/* Modal Image */
+#modalImage {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(209, 0, 0, 0.2);
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Next & Prev Buttons */
+.modal-controls {
+  margin-top: 20px;
+}
+.modal-controls button {
+  background-color: #050136b9;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.modal-controls button:hover {
+  background-color: #ff050555;
+}
+
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="MEDIA_5_logo-3.png" alt="Media5 Logo" width="250px">
+    </div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="profile.html" class="nav-links active">Profile</a>
+    </nav>
+   
+    <!-- Search button for mobile -->
+    <div class="search-toggle" id="search-toggle">
+      <i class="fas fa-search"></i>
+    </div>
+  
+    <!-- Search Box (Initially Hidden) -->
+    <div class="search-box" id="search-box">
+      <input type="text" placeholder="Search..." />
+      <i class="fas fa-search search-icon"></i> <!-- Search icon inside the input -->
+    </div>
+  </header>
+  <h2>Media 5 Image Gallery</h2>
+
+  <!-- Filter Buttons -->
+  <div class="filter-buttons">
+    <button onclick="filterGallery('all')">All</button>
+    <button onclick="filterGallery('Bakery logos')">Bakery Logos</button>
+    <button onclick="filterGallery('E-commerce')">E-commerce Logos </button>
+    <button onclick="filterGallery('Transport')">Transportation Logos</button>
+    <button onclick="filterGallery('Brand')">Brand identity Logos</button>
+    <button onclick="filterGallery('Car')">Car Bond Logos</button>
+    <button onclick="filterGallery('Delivery')">Delivery Logos</button>
+    <button onclick="filterGallery('Posters')">Posters and Banners</button>
+    <button onclick="filterGallery('Business Cards')">Business Cards</button>
+    <button onclick="filterGallery('Bar')">Bar Logos</button>
+    <button onclick="filterGallery('School')">School Logos</button>
+    <button onclick="filterGallery('Stickers')">Stickers</button>
+    <button onclick="filterGallery('DTF')">DTF Labelling</button>
+    <button onclick="filterGallery('construction')">Construction Logos</button>
+    <button onclick="filterGallery('Company logos')">Company identity Logos</button>
+    <button onclick="filterGallery('Cafe logos')">Cafe Logos</button>
+    <button onclick="filterGallery('hotel logos')">hotel Logos</button>
+    
+  </div>
+  <script>
+    function filterGallery(category) {
+      const items = document.querySelectorAll('.gallery-item');
+  
+      items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+  
+        if (category === 'all' || itemCategory === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+  
+      // Optional: Set active class on buttons
+      const buttons = document.querySelectorAll('.filter-buttons button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
+  
+<!-- AOS Animation Script -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800, // Animation duration in ms
+    easing: 'ease-in-out',
+    once: true,    // Whether animation should happen only once
+  });
+</script>
+
+  <!-- Gallery -->
+  <div class="gallery-container" >
+  <div class="gallery-item" data-aos="fade-up" data-category="hotel logos">
+  <img src="hotel logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="hotel logos">
+  <img src="hotel logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="hotel logos">
+  <img src="hotel logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="hotel logos">
+  <img src="hotel logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="hotel logos">
+  <img src="hotel logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="hotel logos">
+  <img src="hotel logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="hotel logos">
+  <img src="hotel logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="hotel logos">
+  <img src="hotel logo (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="hotel logos">
+  <img src="hotel logo (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="hotel logos">
+  <img src="hotel logo (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="hotel logos">
+  <img src="hotel logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="hotel logos">
+  <img src="hotel logo (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="hotel logos">
+  <img src="hotel logo (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="hotel logos">
+  <img src="hotel logo (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="hotel logos">
+  <img src="hotel logo (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="hotel logos">
+  <img src="hotel logo (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="hotel logos">
+  <img src="hotel logo (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="hotel logos">
+  <img src="hotel logo (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="hotel logos">
+  <img src="hotel logo (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Hotel</div>
+</div>
+ 
+
+
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Cafe logos">
+  <img src="cafe logo (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Cafe</div>
+</div>
+
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (22).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (23).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (24).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (25).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (26).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (27).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (28).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (29).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (30).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (31).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (32).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (33).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (34).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (35).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (36).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (37).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (38).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (39).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (40).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (41).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (42).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (43).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (44).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (45).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (46).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (47).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (48).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (49).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (50).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (51).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (52).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (53).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (54).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (55).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (56).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (57).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (58).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Company logos">
+  <img src="company logo (59).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Company</div>
+</div>
+
+    
+    
+
+
+  <div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="construction">
+  <img src="construction logo (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Construction</div>
+</div>
+
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+<div class="gallery-item" data-aos="fade-right" data-category="DTF">
+  <img src="DTF label (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">DTF Labelling</div>
+</div>
+
+
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Stickers">
+  <img src="stickers (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Stickers</div>
+</div>
+
+<!-- Start of Bar Gallery Items -->
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-in" data-category="Bar">
+  <img src="bar logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bar">
+  <img src="bar logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bar</div>
+</div>
+<!-- End of Bar Gallery Items -->
+
+<!-- Start of School Gallery Items -->
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (22).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="School">
+  <img src="school budge (23).jpeg" onclick="openModal(this)">
+  <div class="category-tag">School</div>
+</div>
+<!-- End of School Gallery Items -->
+
+
+
+
+
+
+ <!-- Start of Business Cards Gallery Items -->
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Business Cards">
+  <img src="business card (22).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Business Cards</div>
+</div>
+<!-- End of Business Cards Gallery Items -->
+
+<!-- Start of Posters Gallery Items -->
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="poster (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Poster</div>
+</div>
+
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Posters">
+  <img src="banner (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Banners</div>
+</div>
+
+
+
+<div class="gallery-container">
+  <!-- Posters 1 to 19 -->
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (1).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (2).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (3).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (4).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (5).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (6).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (7).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (8).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (9).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (10).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (11).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (12).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (13).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (14).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (15).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (16).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (17).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (18).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+  <div class="gallery-item" data-aos="fade-up" data-category="Posters">
+    <img src="poster (19).jpeg" onclick="openModal(this)">
+    <div class="category-tag">Posters</div>
+  </div>
+</div>
+
+<!-- Bakery logos -->
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (22).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (23).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (24).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (25).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (26).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Bakery logos">
+  <img src="bakery logo (27).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Bakery</div>
+</div>
+
+
+
+
+
+
+<!-- Start of E-commerce Gallery Items -->
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (22).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (23).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (24).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (25).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (26).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (27).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (28).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (29).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (30).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (31).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (32).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (33).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (34).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (35).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (36).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (37).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (38).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (39).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="E-commerce">
+  <img src="e-commerce logo (40).jpeg" onclick="openModal(this)">
+  <div class="category-tag">E-commerce</div>
+</div>
+<!-- End of E-commerce Gallery Items -->
+
+<!-- Start of Transport Gallery Items -->
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (22).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (23).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Transport">
+  <img src="transport (24).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Transport</div>
+</div>
+<!-- End of Transport Gallery Items -->
+
+
+
+
+
+
+
+
+
+
+  <!-- Start of Brand Gallery Items -->
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (22).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (23).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (24).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (25).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (26).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (27).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Brand">
+  <img src="identity logo (28).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Brand</div>
+</div>
+<!-- End of Brand Gallery Items -->
+
+<!-- Start of Car Gallery Items -->
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (22).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (23).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (24).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (25).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (26).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (27).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (28).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (29).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (30).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (31).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (32).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (33).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (34).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (35).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<div class="gallery-item" data-aos="fade-left" data-category="Car">
+  <img src="car logo (36).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Car</div>
+</div>
+<!-- End of Car Gallery Items -->
+
+
+
+
+
+
+
+
+
+
+
+
+    
+ <!-- Start of Delivery Gallery Items -->
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (1).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (2).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (3).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (4).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (5).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (6).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (7).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (8).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (9).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (10).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (11).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (12).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (13).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (14).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (15).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (16).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (17).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (18).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (19).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (20).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<div class="gallery-item" data-aos="fade-up" data-category="Delivery">
+  <img src="delivery logo (21).jpeg" onclick="openModal(this)">
+  <div class="category-tag">Delivery</div>
+</div>
+<!-- End of Delivery Gallery Items -->
+
+
+
+<!-- Image Modal -->
+<div id="imageModal" class="modal">
+  <span class="close-btn" onclick="closeModal()">&times;</span>
+  <img id="modalImage" src="" alt="Full View">
+  <div class="modal-controls">
+    <button onclick="prevImage()">Prev</button>
+    <button onclick="nextImage()">Next</button>
+  </div>
+</div>
+
+
+<script>
+  let currentIndex = 0;
+  let galleryItems = [];
+
+  function openModal(imgElement) {
+    galleryItems = Array.from(document.querySelectorAll('.gallery-item img'));
+    currentIndex = galleryItems.indexOf(imgElement);
+
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+
+    modalImage.src = imgElement.src;
+    modal.style.display = 'block';
+  }
+
+  function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    document.getElementById('modalImage').src = galleryItems[currentIndex].src;
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    document.getElementById('modalImage').src = galleryItems[currentIndex].src;
+  }
+
+  // Optional: Close modal on outside click
+  window.onclick = function(event) {
+    const modal = document.getElementById('imageModal');
+    if (event.target === modal) {
+      closeModal();
+    }
+  };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+<!-- Scrolling client logos -->
+<div class="logo-slider">
+  <div class="logo-track">
+    <img src="images/logo1.png" alt="Client 1" />
+    <img src="images/logo2.png" alt="Client 2" />
+    <img src="images/logo3.png" alt="Client 3" />
+    <img src="images/logo4.png" alt="Client 4" />
+    <img src="images/logo5.png" alt="Client 1" />
+    <img src="images/logo6.png" alt="Client 2" />
+    <img src="images/logo7.png" alt="Client 3" />
+    <img src="images/logo8.png" alt="Client 4" />
+    <img src="images/logo9.png" alt="Client 4" />
+    <img src="images/logo10.png" alt="Client 4" />
+    <img src="images/logo11.png" alt="Client 4" />
+    <img src="images/logo12.png" alt="Client 4" />
+    <img src="images/logo13.png" alt="Client 4" />
+    <img src="images/logo14.png" alt="Client 4" />
+    <img src="images/logo15.png" alt="Client 4" />
+  </div>
+</div>
+ <!-- Footer -->
+ <footer class="footer">
+  <div class="footer-container">
+    <!-- Column 1: Logo & About -->
+    <div class="footer-col about">
+      <img src="MEDIA_5_logo-2.png" alt="media 5 Logo" width="200px">
+      <p>Your creative partner in digital media and design solutions.</p>
+      <p>&copy; 2025 Media5. All rights reserved.</p>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Contact Info -->
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Kampala, Nasser Road | Digital Complex | Level 2 – Suite S-94</li>
+        <li><i class="fas fa-phone-alt"></i> <a href="tel:+256773419980">+256 773 419980</a> | <a href="tel:+256704907671">+256 704 907671</a></li>
+        <li><i class="fas fa-envelope"></i> <a href="mailto:media5fiveug@gmail.com">media5fiveug@gmail.com</a></li>
+    </ul>
+    </div>
+
+    <!-- Column 4: Social Media -->
+    <div class="footer-col">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="https://facebook.com/media5avenue" target="_blank"><i class="fab fa-facebook-f"></i></a>
+         <a href="https://instagram.com/media5avenue" target="_blank"><i class="fab fa-instagram"></i></a>
+         <a href="https://linkedin.com/company/media5avenue" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+         <a href="https://twitter.com/media5avenue" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com/@media5avenue" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+
+</footer>
+
+  <!-- Script for navbar toggle -->
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+  <script>
+    let slides = document.querySelectorAll(".slide");
+    let current = 0;
+  
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === index) {
+          slide.classList.add("active");
+        }
+      });
+    }
+  
+    function nextSlide() {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+  
+    setInterval(nextSlide, 4000); // Change slide every 4 seconds
+    
+  </script>
+  <script src="main.js"></script>
+
+</body>
+</html>

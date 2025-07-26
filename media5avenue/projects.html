@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | Media5</title>
+  <link rel="stylesheet" href="footernav.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; color: #333; }
+  
+    .logo { font-size: 1.8rem; font-weight: bold; }
+    .nav-links a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; }
+    .nav-links a:hover { color: #00bcd4; }
+    .hero {
+  background: linear-gradient(to right, rgba(6, 1, 51, 0.925), rgb(88, 1, 1)),
+              url('MEDIA_5_logo-3.png'); /* Add your background image here */
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  padding: 100px 20px;
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+@media (max-width: 768px) {
+  .hero {
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 50px 20px;
+  }
+}
+.hero-content {
+  max-width: 800px;
+  margin: auto;
+}
+
+.typewriter-text {
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-right: 2px solid #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 2.5s steps(30, end) infinite, blink 0.75s step-end infinite;
+  margin: 0 auto 20px;
+}
+@media screen and (max-width: 600px) {
+  .typewriter-text {
+    font-size: 32px;
+    width: 100%;
+    animation: typing 3.5s steps(30, end) infinite, blink 0.75s step-end infinite;
+  }
+  
+}
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+.subheading {
+  font-size: 18px;
+  color: #ddd;
+  margin-bottom: 15px;
+}
+
+.highlight {
+  font-size: 16px;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Typewriter animation */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+    .section { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
+    .section h2 { font-size: 2rem; margin-bottom: 20px; border-left: 4px solid #00bcd4; padding-left: 10px; color: #111827; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .card:hover { transform: scale(1.02); }
+    .card img { width: 100%; height: 200px; object-fit: cover; }
+    .card .content { padding: 15px; }
+    .card h3 { margin-bottom: 10px; font-size: 1.1rem; }
+    .card p { font-size: 0.95rem; color: #555; }
+    .cta { text-align: center; margin: 60px 20px; }
+    .cta h3 { font-size: 1.8rem; margin-bottom: 15px; }
+    .cta button { background: #00bcd4; border: none; padding: 12px 24px; color: white; font-size: 1rem; border-radius: 6px; cursor: pointer; }
+    .cta button:hover { background: #0097a7; }
+   
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <div class="logo">
+      <img src="MEDIA_5_logo-3.png" alt="Media5 Logo" width="250px">
+    </div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html" class="nav-links active">Projects</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+   
+    
+    <!-- Search button for mobile -->
+    <div class="search-toggle" id="search-toggle">
+      <i class="fas fa-search"></i>
+    </div>
+  
+    <!-- Search Box (Initially Hidden) -->
+    <div class="search-box" id="search-box">
+      <input type="text" placeholder="Search..." />
+      <i class="fas fa-search search-icon"></i> <!-- Search icon inside the input -->
+    </div>
+  </header>
+
+   <div class="floating-ad">
+    <a href="advert2025.html" >
+      <div class="ad-heading"><i class="fas fa-fire"></i> 2025 Mega Discounts <i class="fas fa-fire"></i></div>
+      <img src="mega.jpg" alt="Campaign Discounts">
+    </a>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query").toLowerCase();
+    const resultsDiv = document.getElementById("results");
+
+    const pages = [
+      { title: "Home", url: "index.html", keywords: "home welcome media5" },
+      { title: "About", url: "about.html", keywords: "about team company" },
+      { title: "Projects", url: "projects.html", keywords: "projects portfolio work" },
+      { title: "Profile", url: "profile.html", keywords: "profile account user" },
+    ];
+
+    const filtered = pages.filter(p =>
+      p.keywords.toLowerCase().includes(query)
+    );
+
+    if (filtered.length > 0) {
+      filtered.forEach(p => {
+        const link = document.createElement('a');
+        link.href = p.url;
+        link.textContent = `Go to: ${p.title}`;
+        link.style.display = 'block';
+        resultsDiv.appendChild(link);
+      });
+    } else {
+      resultsDiv.textContent = "No results found.";
+    }
+  </script>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="typewriter-text" data-text="Our Work Speaks Louder"></h1>
+    <p class="subheading">From concept to reality — explore our recent creative projects that define who we are.</p>
+    <p class="highlight">Crafted with strategy. Delivered with style. Trusted by bold brands.</p>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const el = document.querySelector(".typewriter-text");
+    const text = el.getAttribute("data-text");
+    el.textContent = text;
+  });
+</script>
+
+
+ <section class="section">
+  <h2>Project Gallery</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="cafe logo (13).jpeg" alt="Brand Design">
+      <div class="content">
+        <h3>Brand Identity for Cafe Zuri</h3>
+        <p>We crafted a modern and inviting brand identity for Cafe Zuri, including a fresh logo, a rich color palette, and custom signage to enhance their in-store atmosphere.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="fitness.jpg" alt="Large Format Print">
+      <div class="content">
+        <h3>Billboard for Fitness Gym</h3>
+        <p>Media5 designed and printed a large-format billboard for a local fitness gym, increasing brand visibility and attracting new members to their facility.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="fitness1.jpg" alt="Social Media">
+      <div class="content">
+        <h3>Social Media Campaign for TechFair</h3>
+        <p>We created eye-catching social media graphics and video content for TechFair, leading to a 30% increase in event attendance through Instagram and Facebook promotions.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="e-commerce logo (17).jpeg" alt="Packaging Design">
+      <div class="content">
+        <h3>Eco-Friendly Packaging for GreenGlo</h3>
+        <p>Our team designed a sustainable and stylish packaging solution for GreenGlo's eco-friendly cleaning products, helping them stand out on shelves while promoting environmental responsibility.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>By Service</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="DTF label (10).jpeg" alt="Label">
+      <div class="content">
+        <h3>Product Labels</h3>
+        <p>We specialize in designing custom labels for a variety of products, including food, beverages, cosmetics, and cleaning supplies. Our labels combine attractive visuals with compliance to industry standards.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="kits.jpg" alt="Branding Kits">
+      <div class="content">
+        <h3>Complete Branding Kits</h3>
+        <p>Our branding kits provide everything a business needs to establish a strong visual identity, including business cards, letterheads, social media templates, and much more.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="event.jpg" alt="Event Banners">
+      <div class="content">
+        <h3>Event Banners & Signage</h3>
+        <p>We design and produce high-quality banners, posters, and signage for trade shows, corporate events, and promotional activities, ensuring your brand stands out at any event.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="website.jpg" alt="Web Design">
+      <div class="content">
+        <h3>Website Design & Development</h3>
+        <p>Our web design services include responsive, user-friendly websites built to enhance your online presence. From e-commerce to informational sites, we ensure your website is as functional as it is beautiful.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <section class="cta">
+    <h3>Inspired by our work?</h3>
+    <p>Let’s bring your idea to life.</p>
+    <a href="lux.html">
+      
+    <button >View Our work</button>
+    </a>
+  </section>
+ <!-- Scrolling client logos -->
+<div class="logo-slider">
+  <div class="logo-track">
+    <img src="logo1.png" alt="Client 1" />
+    <img src="logo2.png" alt="Client 2" />
+    <img src="logo3.png" alt="Client 3" />
+    <img src="logo4.png" alt="Client 4" />
+    <img src="logo5.png" alt="Client 1" />
+    <img src="logo6.png" alt="Client 2" />
+    <img src="logo7.png" alt="Client 3" />
+    <img src="logo8.png" alt="Client 4" />
+    <img src="logo9.png" alt="Client 4" />
+    <img src="logo10.png" alt="Client 4" />
+    <img src="logo11.png" alt="Client 4" />
+    <img src="logo12.png" alt="Client 4" />
+    <img src="logo13.png" alt="Client 4" />
+    <img src="logo14.png" alt="Client 4" />
+    <img src="logo15.png" alt="Client 4" />
+  </div>
+</div>
+
+ <!-- Footer -->
+ <footer class="footer">
+  <div class="footer-container">
+    <!-- Column 1: Logo & About -->
+    <div class="footer-col about">
+      <img src="MEDIA_5_logo-2.png" alt="media 5 Logo" width="200px">
+      <p>Your creative partner in digital media and design solutions.</p>
+      <p>&copy; 2025 Media5. All rights reserved.</p>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Contact Info -->
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Kampala, Nasser Road | Digital Complex | Level 2 – Suite S-94</li>
+        <li><i class="fas fa-phone-alt"></i> <a href="tel:+256773419980">+256 773 419980</a> | <a href="tel:+256704907671">+256 704 907671</a></li>
+        <li><i class="fas fa-envelope"></i> <a href="mailto:media5fiveug@gmail.com">media5fiveug@gmail.com</a></li>
+    </ul>
+    </div>
+
+    <!-- Column 4: Social Media -->
+    <div class="footer-col">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="https://facebook.com/media5avenue" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com/media5avenue" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com/company/media5avenue" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://twitter.com/media5avenue" target="_blank"><i class="fab fa-twitter"></i></a>
+         <a href="https://youtube.com/@media5avenue" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+
+  
+</footer>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+  <script src="main.js"></script>
+</body>
+
+
+</html>

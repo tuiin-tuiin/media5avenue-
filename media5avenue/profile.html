@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media5 | Profile</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="footernav.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background-color: #f9fafb;
+      color: #111827;
+    }
+    .header {
+      position: relative;
+      background-image: url(printing.jpeg);
+      background-size: cover;
+      margin: 0;
+      width: 100%;
+      color: rgb(39, 1, 88);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      transition: transform 0.3s;
+    }
+    .header h1:hover {
+      transform: scale(1.05);
+    }
+    .header p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    section {
+      padding: 0;
+      margin:10px;
+      
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #032a64;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+    .team img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
+    .team img:hover {
+      transform: scale(1.1);
+    }
+
+
+
+
+
+
+
+    .testimonial {
+      font-style: italic;
+      background-color: #e5f6f8;
+      padding: 20px;
+      border-left: 5px solid #9c0808;
+      margin-bottom: 20px;
+      transition: transform 0.3s;
+    }
+    .testimonial:hover {
+      transform: scale(1.02);
+      background-color: #9c0808;
+      color: white;
+    }
+    .cta {
+      text-align: center;
+      margin-top: 5px;
+    }
+    div.cta p {
+      margin-bottom: 10px;
+    }
+    .cta a {
+      background-color: #030244;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .cta a:hover {
+      background-color: #028f9c;
+      transform: scale(1.05);
+    }
+    
+  </style>
+</head>
+<body>
+    <!-- Navbar -->
+  <header>
+    <div class="logo">
+      <img src="MEDIA_5_logo-3.png" alt="Media5 Logo" width="250px">
+    </div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="profile.html" class="nav-links active">Profile</a>
+    </nav>
+   
+    <!-- Search button for mobile -->
+    <div class="search-toggle" id="search-toggle">
+      <i class="fas fa-search"></i>
+    </div>
+  
+    <!-- Search Box (Initially Hidden) -->
+    <div class="search-box" id="search-box">
+      <input type="text" placeholder="Search..." />
+      <i class="fas fa-search search-icon"></i> <!-- Search icon inside the input -->
+    </div>
+  </header>
+
+   <div class="floating-ad">
+    <a href="advert2025.html" >
+      <div class="ad-heading"><i class="fas fa-fire"></i> 2025 Mega Discounts <i class="fas fa-fire"></i></div>
+      <img src="mega.jpg" alt="Campaign Discounts">
+    </a>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query").toLowerCase();
+    const resultsDiv = document.getElementById("results");
+
+    const pages = [
+      { title: "Home", url: "index.html", keywords: "home welcome media5" },
+      { title: "About", url: "about.html", keywords: "about team company" },
+      { title: "Projects", url: "projects.html", keywords: "projects portfolio work" },
+      { title: "Profile", url: "profile.html", keywords: "profile account user" },
+    ];
+
+    const filtered = pages.filter(p =>
+      p.keywords.toLowerCase().includes(query)
+    );
+
+    if (filtered.length > 0) {
+      filtered.forEach(p => {
+        const link = document.createElement('a');
+        link.href = p.url;
+        link.textContent = `Go to: ${p.title}`;
+        link.style.display = 'block';
+        resultsDiv.appendChild(link);
+      });
+    } else {
+      resultsDiv.textContent = "No results found.";
+    }
+  </script>
+
+  <section class="header" data-aos="fade-down">
+    <h1>Media5 Profile</h1>
+    <p>Creative agency delivering powerful design, branding, and printing solutions across Uganda and beyond.</p>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2>Company Overview</h2>
+    <p>Founded in 2022, Media5 is a one-stop creative studio that specializes in brand identity design, printing solutions, and promotional materials. With a passion for creativity and quality, we help businesses turn their vision into powerful visuals.</p>
+    <p><strong>Location:</strong> Kampala, Uganda<br/>
+       <strong>Mission:</strong> Empower brands through bold, creative, and impactful visual design and print media.</p>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2>Core Services</h2>
+    <div class="grid">
+      <div class="card" data-aos="zoom-in">Logo & Brand Identity</div>
+      <div class="card" data-aos="zoom-in">Poster & Flyer Design</div>
+      <div class="card" data-aos="zoom-in">Business Cards & Stationery</div>
+      <div class="card" data-aos="zoom-in">Banners & Large Format Printing</div>
+      <div class="card" data-aos="zoom-in">Stickers & Labels</div>
+      <div class="card" data-aos="zoom-in">T-Shirt & Merchandise Printing</div>
+      <div class="card" data-aos="zoom-in">Social Media Kits</div>
+    </div>
+  </section>
+
+  <section class="team" data-aos="fade-up">
+    <h2>Meet the Team</h2>
+    <div class="grid">
+      <div class="card" style="text-align:center" data-aos="fade-right">
+        
+        <h3>Tumwiine Innocent</h3>
+        <p>Website Developer</p>
+        <div class="person-details">
+          <button >
+         <a href="tel:+2560760891717"> Call</a>
+         
+        </button>
+        <button>
+          <a href="mailto:ashleykarim108@gmail.com">Email</a>
+        </button>
+        <button>
+          <a href="http://wa.me/2560760891717">WhatsApp</a>
+        </button>
+        </div>
+      </div>
+      <div class="card" style="text-align:center" data-aos="fade-up">
+       
+        <h3>Sam Adam</h3>
+        <p>Expert Graphic Designer</p>
+         <div class="person-details">
+          <button >
+         <a href="tel:+256786241579"> Call</a>
+         
+        </button>
+        <button>
+          <a href="mailto:media5avenue@gmail.com">Email</a>
+        </button>
+        <button>
+          <a href="http://wa.me/256786241579">WhatsApp</a>
+        </button>
+        </div>
+      </div>
+      <div class="card" style="text-align:center" data-aos="fade-left">
+        
+        <h3>Bash</h3>
+        <p>Graphics Designer/Printing manager</p>
+         <div class="person-details">
+          <button >
+         <a href="tel:+2560755448449"> Call</a>
+         
+        </button>
+        <button>
+          <a href="mailto:media5avenue@gmail.com">Email</a>
+        </button>
+        <button>
+          <a href="http://wa.me/2560755448449">WhatsApp</a>
+        </button>
+        </div>
+      </div>
+    </div>
+  </section>
+<style>
+  .person-details button {
+    justify-content: space-between;
+    width: 100px;
+    display: inline-block;
+    font-size: 15px;
+    padding: 10px;
+    box-shadow: 0 0 5px rgb(21, 46, 1);
+    background-color: #033238;
+    border-radius:20px;
+    transition: transform ease-in-out 0.1s;
+    cursor: pointer;
+  }
+  .person-details button:hover{
+transform: scale(1.1);
+background-color: #000000;
+  }
+  a{
+    text-decoration: none;
+    color: white;
+  }
+</style>
+  <section data-aos="fade-up">
+    <h2>What Clients Say</h2>
+    <div class="testimonial" data-aos="fade-right">“Media5 helped us rebrand our school with professional banners and flyers. Their work is top-notch!” — Lungujja Progressive School</div>
+    <div class="testimonial" data-aos="fade-left">“Fast delivery and great design quality. I highly recommend them!” — Sarah K., Boutique Owner</div>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2>Why Choose Media5?</h2>
+    <ul>
+      <li>✔ Creative and modern design approach</li>
+      <li>✔ Fast and reliable service delivery</li>
+      <li>✔ Affordable pricing for all services</li>
+      <li>✔ Attention to detail and customer satisfaction</li>
+      <li>✔ Friendly and professional support</li>
+    </ul>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2>View Our Gallery</h2>
+    <div class="cta">
+      <p>Have an idea? Let's bring it to life!</p>
+      <a href="lux.html">Click Here</a>
+    </div>
+  </section>
+ <!-- Scrolling client logos -->
+<div class="logo-slider">
+  <div class="logo-track">
+    <img src="logo1.png" alt="Client 1" />
+    <img src="logo2.png" alt="Client 2" />
+    <img src="logo3.png" alt="Client 3" />
+    <img src="logo4.png" alt="Client 4" />
+    <img src="logo5.png" alt="Client 1" />
+    <img src="logo6.png" alt="Client 2" />
+    <img src="logo7.png" alt="Client 3" />
+    <img src="logo8.png" alt="Client 4" />
+    <img src="logo9.png" alt="Client 4" />
+    <img src="logo10.png" alt="Client 4" />
+    <img src="logo11.png" alt="Client 4" />
+    <img src="logo12.png" alt="Client 4" />
+    <img src="logo13.png" alt="Client 4" />
+    <img src="logo14.png" alt="Client 4" />
+    <img src="logo15.png" alt="Client 4" />
+  </div>
+</div>
+
+ <!-- Footer -->
+ <footer class="footer">
+  <div class="footer-container">
+    <!-- Column 1: Logo & About -->
+    <div class="footer-col about">
+      <img src="MEDIA_5_logo-2.png" alt="media 5 Logo" width="200px">
+      <p>Your creative partner in digital media and design solutions.</p>
+      <p>&copy; 2025 Media5. All rights reserved.</p>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Contact Info -->
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Kampala, Nasser Road | Digital Complex | Level 2 – Suite S-94</li>
+        <li><i class="fas fa-phone-alt"></i> <a href="tel:+256773419980">+256 773 419980</a> | <a href="tel:+256704907671">+256 704 907671</a></li>
+        <li><i class="fas fa-envelope"></i> <a href="mailto:media5fiveug@gmail.com">media5fiveug@gmail.com</a></li>
+    </ul>
+    </div>
+
+    <!-- Column 4: Social Media -->
+    <div class="footer-col">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="https://facebook.com/media5avenue" target="_blank"><i class="fab fa-facebook-f"></i></a>
+         <a href="https://instagram.com/media5avenue" target="_blank"><i class="fab fa-instagram"></i></a>
+         <a href="https://linkedin.com/company/media5avenue" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+         <a href="https://twitter.com/media5avenue" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com/@media5avenue" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+
+  
+</footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+  <script src="main.js"></script>
+</body>
+
+
+</html>
