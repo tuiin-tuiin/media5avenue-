@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Media5 | Home</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="footernav.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="logo">
+      <img src="images/MEDIA_5_logo-3.png" alt="Media5 Logo" width="250px">
+    </div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+ 
+  
+    <!-- Search button for mobile -->
+    <div class="search-toggle" id="search-toggle">
+      <i class="fas fa-search"></i>
+    </div>
+  
+    <!-- Search Box (Initially Hidden) -->
+    <div class="search-box" id="search-box">
+      <input type="text" placeholder="Search..." />
+      <i class="fas fa-search search-icon"></i> <!-- Search icon inside the input -->
+    </div>
+  </header>
+
+   <div class="floating-ad">
+    <a href="advert2025.html" >
+      <div class="ad-heading"><i class="fas fa-fire"></i> 2025 Mega Discounts <i class="fas fa-fire"></i></div>
+      <img src="mega.jpg" alt="Campaign Discounts">
+    </a>
+  </div>
+  
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query").toLowerCase();
+    const resultsDiv = document.getElementById("results");
+
+    const pages = [
+      { title: "Home", url: "index.html", keywords: "home welcome media5" },
+      { title: "About", url: "about.html", keywords: "about team company" },
+      { title: "Projects", url: "projects.html", keywords: "projects portfolio work" },
+      { title: "Profile", url: "profile.html", keywords: "profile account user" },
+      {title: "Gallery", url: "lux.html", keywords: "gallery images photos"},
+    ];
+
+    const filtered = pages.filter(p =>
+      p.keywords.toLowerCase().includes(query)
+    );
+
+    if (filtered.length > 0) {
+      filtered.forEach(p => {
+        const link = document.createElement('a');
+        link.href = p.url;
+        link.textContent = `Go to: ${p.title}`;
+        link.style.display = 'block';
+        resultsDiv.appendChild(link);
+      });
+    } else {
+      resultsDiv.textContent = "No results found.";
+    }
+  </script>
+ 
+  
+  <!-- Hero Section -->
+   
+  <section class="hero-slider">
+  <div class="slider-container">
+    <div class="slide active" style="background-image: url('DTF printing.webp')">
+      <div class="overlay-text">DTF Printing</div>
+    </div>
+    <div class="slide" style="background-image: url('sublimation 1.jpg')">
+      <div class="overlay-text">Sublimation Printing</div>
+    </div>
+    <div class="slide" style="background-image: url('uv printing.jpeg')">
+      <div class="overlay-text">Large Format Printing</div>
+    </div>
+    <div class="slide" style="background-image: url('promotional item.jpg')">
+      <div class="overlay-text">Promotional Items</div>
+    </div>
+    <div class="slide" style="background-image: url('DTF label (10).jpeg')">
+      <div class="overlay-text">Labeling Solutions</div>
+    </div>
+    <div id="video" class="slide">
+      <video src="70a35082fe1a9084133bacf3ec71888d.mp4" autoplay muted loop width="100%"></video>
+      <div class="overlay-text"> UV printing</div>
+    </div>
+  </div>
+</section>
+
+ 
+
+  <!-- About Section -->
+   
+  <section class="section">
+    <h2>About Media5</h2>
+    <p>
+      Media5 is your creative partner in visual branding and print production. We specialize in delivering high-quality design and print solutions — from eye-catching banners and impactful posters to customized product labels and packaging. Our mission is simple: to bring your ideas to life through compelling, professional visuals that make a lasting impression.
+    </p>
+  </section>
+<!-- Recent Projects Section -->
+<!-- Recent Projects Section -->
+<section class="section">
+  <h2>Recent Projects</h2>
+  <div class="projects">
+    <div class="project-card" onclick="openVideoModal(0)">
+      <video controls src="7fa24f774f23d46f4710e6343e1e9e3d.mp4" autoplay muted loop></video>
+      <div class="info">
+        <h3>Outdoor Banner for Xpo</h3>
+        <p>Massive format printing with weatherproof design.</p>
+      </div>
+    </div>
+    <div class="project-card" onclick="openVideoModal(1)">
+      <video controls src="video (2).mp4" autoplay loop muted></video>
+      <div class="info">
+        <h3>Product Labeling - Beauty Co.</h3>
+        <p>Custom design labels for Company products.</p>
+      </div>
+    </div>
+    <div class="project-card" onclick="openVideoModal(2)">
+      <video controls src="641059328223514165.mp4" autoplay loop muted></video>
+      <div class="info">
+        <h3>Event Posters</h3>
+        <p>High-impact promotional posters for local concerts.</p>
+      </div>
+    </div>
+    <div class="project-card" onclick="openVideoModal(3)">
+      <video controls src="video (6).mp4" autoplay loop muted></video>
+      <div class="info">
+        <h3>Leather Labeling</h3>
+        <p>Durable and stylish labels for bags, shoes, and accessories using precision embossing.</p>
+      </div>
+    </div>
+    <div class="project-card" onclick="openVideoModal(4)">
+      <video controls src="video (18).mp4" autoplay loop muted></video>
+      <div class="info">
+        <h3>Custom Stickers</h3>
+        <p>Vibrant, waterproof stickers ideal for branding, packaging, and personal use.</p>
+      </div>
+    </div>
+    <div class="project-card" onclick="openVideoModal(5)">
+      <video controls src="video (19).mp4" autoplay loop muted></video>
+      <div class="info">
+        <h3>High-Quality Printing</h3>
+        <p>Sharp and colorful prints for posters, brochures, and promotional materials.</p>
+      </div>
+    </div>
+    <div class="project-card" onclick="openVideoModal(6)">
+      <video controls src="video (22).mp4" autoplay loop muted></video>
+      <div class="info">
+        <h3>Custom Designs</h3>
+        <p>Tailored graphic design services for unique branding, apparel, and marketing visuals.</p>
+      </div>
+    </div>
+    <div class="project-card" onclick="openVideoModal(7)">
+      <video controls src="video (26).mp4" autoplay loop muted></video>
+      <div class="info">
+        <h3>Custom Key Holder Designs</h3>
+        <p>Personalized key holders crafted with unique logos or names — perfect for branding or gifts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Video Modal for Enlarged View -->
+
+
+
+ <h1 style="text-align:center; padding: 15px;">Media 5 Avenue Recent Projects</h1>
+<div class="slider-row">
+  <div class="slide-track">
+    <img src="bakery logo (12).jpeg" alt="Image 1" />
+    <img src="transport (11).jpeg" alt="Image 2" />
+    <img src="cafe logo (12).jpeg" alt="Image 3" />
+    <img src="delivery logo (11).jpeg" alt="Image 4" />
+    <img src="DTF label (12).jpeg" alt="Image 5" />
+    <img src="bakery logo (7).jpeg" alt="Image 1" />
+    <img src="transport (2).jpeg" alt="Image 2" />
+    <img src="cafe logo (8).jpeg" alt="Image 3" />
+    <img src="delivery logo (1).jpeg" alt="Image 4" />
+    <img src="DTF label (15).jpeg" alt="Image 5" />
+    <img src="poster (10).jpeg" alt="Image 1" />
+    <img src="poster (15).jpeg" alt="Image 2" />
+    <img src="bakery logo (17).jpeg" alt="Image 3" />
+    <img src="company logo (13).jpeg" alt="Image 4" />
+    <img src="bar logo (11).jpeg" alt="Image 5" />
+  </div>
+</div>
+
+<div class="slider-row">
+  <div class="slide-track-alt">
+    <img src="business card (11).jpeg" alt="Image 1" />
+    <img src="bar logo (7).jpeg" alt="Image 2" />
+    <img src="identity logo (12).jpeg" alt="Image 3" />
+    <img src="car logo (16).jpeg" alt="Image 4" />
+    <img src="poster (14).jpeg" alt="Image 5" />
+    <img src="stickers (12).jpeg" alt="Image 1" />
+    <img src="school budge (11).jpeg" alt="Image 2" />
+    <img src="saloon logo (13).jpeg" alt="Image 3" />
+    <img src="construction logo (10).jpeg" alt="Image 4" />
+    <img src="hotel logo (11).jpeg" alt="Image 5" />
+    <img src="construction logo (12).jpeg" alt="Image 1" />
+    <img src="e-commerce logo (12).jpeg" alt="Image 2" />
+    <img src="company logo (11).jpeg" alt="Image 3" />
+    <img src="cafe logo (12).jpeg" alt="Image 4" />
+    <img src="hotel logo (11).jpeg" alt="Image 5" />
+  </div>
+</div>
+
+<div class="slider-row">
+  <div class="slide-track-reverse">
+    <video src="video (1).mp4" autoplay loop muted></video>
+    <video src="video (2).mp4" autoplay loop muted></video>
+    <video src="video (3).mp4" autoplay loop muted></video>
+    <video src="video (4).mp4" autoplay loop muted></video>
+    <video src="video (5).mp4" autoplay loop muted></video>
+    <video src="video (6).mp4" autoplay loop muted></video>
+    <video src="video (7).mp4" autoplay loop muted></video>
+    <video src="video (8).mp4" autoplay loop muted></video>
+    <video src="video (9).mp4" autoplay loop muted></video>
+    <video src="video (10).mp4" autoplay loop muted></video>
+    <video src="video (11).mp4" autoplay loop muted></video>
+    <video src="video (12).mp4" autoplay loop muted></video>
+    <video src="video (13).mp4" autoplay loop muted></video>
+  </div>
+</div>
+
+<div class="slider-row">
+  <div class="slide-track-alt-reverse">
+    <video src="video (13).mp4" autoplay loop muted></video>
+    <video src="video (14).mp4" autoplay loop muted></video>
+    <video src="video (15).mp4" autoplay loop muted></video>
+    <video src="video (16).mp4" autoplay loop muted></video>
+    <video src="video (17).mp4" autoplay loop muted></video>
+    <video src="video (18).mp4" autoplay loop muted></video>
+    <video src="video (19).mp4" autoplay loop muted></video>
+    <video src="video (20).mp4" autoplay loop muted></video>
+    <video src="video (21).mp4" autoplay loop muted></video>
+    <video src="video (22).mp4" autoplay loop muted></video>
+    <video src="video (23).mp4" autoplay loop muted></video>
+    <video src="video (24).mp4" autoplay loop muted></video>
+    <video src="video (25).mp4" autoplay loop muted></video>
+    <video src="video (26).mp4" autoplay loop muted></video>
+  </div>
+</div>
+
+
+  
+
+
+ <!-- Scrolling client logos -->
+<div class="logo-slider">
+  <div class="logo-track">
+    <img src="logo1.png" alt="Client 1" />
+    <img src="logo2.png" alt="Client 2" />
+    <img src="logo3.png" alt="Client 3" />
+    <img src="logo4.png" alt="Client 4" />
+    <img src="logo5.png" alt="Client 1" />
+    <img src="logo6.png" alt="Client 2" />
+    <img src="logo7.png" alt="Client 3" />
+    <img src="logo8.png" alt="Client 4" />
+    <img src="logo9.png" alt="Client 4" />
+    <img src="logo10.png" alt="Client 4" />
+    <img src="logo11.png" alt="Client 4" />
+    <img src="logo12.png" alt="Client 4" />
+    <img src="logo13.png" alt="Client 4" />
+    <img src="logo14.png" alt="Client 4" />
+    <img src="logo15.png" alt="Client 4" />
+  </div>
+</div>
+
+ <!-- Footer -->
+ <footer class="footer">
+  <div class="footer-container">
+    <!-- Column 1: Logo & About -->
+    <div class="footer-col about">
+      <img src="MEDIA_5_logo-2.png" alt="media 5 Logo" width="200px">
+      <p>Your creative partner in digital media and design solutions.</p>
+      <p>&copy; 2025 Media5. All rights reserved.</p>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Contact Info -->
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Kampala, Nasser Road | Digital Complex | Level 2 – Suite S-94</li>
+        <li><i class="fas fa-phone-alt"></i> <a href="tel:+256773419980">+256 773 419980</a> | <a href="tel:+256704907671">+256 704 907671</a></li>
+        <li><i class="fas fa-envelope"></i> <a href="mailto:media5fiveug@gmail.com">media5fiveug@gmail.com</a></li>
+    </ul>
+    </div>
+
+    <!-- Column 4: Social Media -->
+    <div class="footer-col">
+      <h3>Follow Us</h3>
+      <div class="social-icons">
+        <a href="https://facebook.com/media5avenue" target="_blank"><i class="fab fa-facebook-f"></i></a>
+         <a href="https://instagram.com/media5avenue" target="_blank"><i class="fab fa-instagram"></i></a>
+         <a href="https://linkedin.com/company/media5avenue" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+         <a href="https://twitter.com/media5avenue" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com/@media5avenue" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+
+</footer>
+
+  <!-- Script for navbar toggle -->
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+  <script>
+    let slides = document.querySelectorAll(".slide");
+    let current = 0;
+  
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === index) {
+          slide.classList.add("active");
+        }
+      });
+    }
+  
+    function nextSlide() {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+  
+    setInterval(nextSlide, 4000); // Change slide every 4 seconds
+    
+  </script>
+  <script src="main.js"></script>
+</body>
+
+
+</html>

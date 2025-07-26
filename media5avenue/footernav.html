@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Media5</title>
+  <link rel="stylesheet" href="footernav.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+  <header>
+    <div class="logo">Media5</div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+    <script>
+      const searchToggle = document.getElementById('search-toggle');
+      const searchBox = document.getElementById('search-box');
+    
+      searchToggle.addEventListener('click', () => {
+        searchBox.classList.toggle('active');
+      });
+    </script>
+    
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+    <div class="search-box">
+      <input type="text" placeholder="Search..." />
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main>
+    <h1>Welcome to Media5</h1>
+    <!-- Your content here -->
+  </main>
+ <!-- Scrolling client logos -->
+ <div class="logo-slider">
+    <div class="logo-track">
+      <img src="logo1.png" alt="Client 1" />
+      <img src="logo2.png" alt="Client 2" />
+      <img src="logo3.png" alt="Client 3" />
+      <img src="logo4.png" alt="Client 4" />
+      <img src="logo1.png" alt="Client 1" />
+      <img src="logo2.png" alt="Client 2" />
+      <img src="logo3.png" alt="Client 3" />
+      <img src="logo4.png" alt="Client 4" />
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    
+    <div class="footer-container">
+      <!-- Column 1: Logo & About -->
+      <div class="footer-col about">
+        <h2>Media5</h2>
+        <p>Your creative partner in digital media and design solutions.</p>
+        <p>&copy; 2025 Media5. All rights reserved.</p>
+      </div>
+  
+      <!-- Column 2: Quick Links -->
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+  
+      <!-- Column 3: Contact Info -->
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <ul>
+          <li>📍 Kampala, Uganda</li>
+          <li>📞 +256 123 456 789</li>
+          <li>📧 hello@media5.com</li>
+        </ul>
+      </div>
+  
+      <!-- Column 4: Social Media -->
+      <div class="footer-col">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      
+  
+   
+  </footer>
+  
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
