@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Results</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="footernav.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    <!-- Navbar -->
+  <header>
+    <div class="logo">
+      <img src="images/MEDIA_5_logo-3.png" alt="Media5 Logo" width="250px">
+    </div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  
+    <!-- Search button for mobile -->
+    <div class="search-toggle" id="search-toggle">
+      <i class="fas fa-search"></i>
+    </div>
+  
+    <!-- Search Box (Initially Hidden) -->
+    <div class="search-box" id="search-box">
+      <input type="text" placeholder="Search..." />
+      <i class="fas fa-search search-icon"></i> <!-- Search icon inside the input -->
+    </div>
+  </header>
+
+   <div class="floating-ad">
+    <a href="advert2025.html" >
+      <div class="ad-heading"><i class="fas fa-fire"></i> 2025 Mega Discounts <i class="fas fa-fire"></i></div>
+      <img src="images/mega.jpg" alt="Campaign Discounts">
+    </a>
+  </div>
+  <main>
+    <h2>Search Results</h2>
+    <div id="results"></div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query").toLowerCase();
+    const resultsDiv = document.getElementById("results");
+
+    const pages = [
+      { title: "Home", url: "index.html", keywords: "home welcome media5" },
+      { title: "About", url: "about.html", keywords: "about team company" },
+      { title: "Projects", url: "projects.html", keywords: "projects portfolio work" },
+      { title: "Profile", url: "profile.html", keywords: "profile account user" },
+      {title: "Gallery", url: "lux.html", keywords: "gallery images photos"},
+    ];
+
+    const filtered = pages.filter(p =>
+      p.keywords.toLowerCase().includes(query)
+    );
+
+    if (filtered.length > 0) {
+      filtered.forEach(p => {
+        const link = document.createElement('a');
+        link.href = p.url;
+        link.textContent = `Go to: ${p.title}`;
+        link.style.display = 'block';
+        resultsDiv.appendChild(link);
+      });
+    } else {
+      resultsDiv.textContent = "No results found.";
+    }
+  </script>
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const resultItems = document.querySelectorAll("#searchResults li");
+  
+    searchInput.addEventListener("keyup", function () {
+      const query = this.value.toLowerCase();
+      resultItems.forEach((item) => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? "block" : "none";
+      });
+    });
+  </script>
+  
+  <!-- Footer -->
+
+  <!-- Scrolling client logos -->
+  <div class="logo-slider">
+    <div class="logo-track">
+      <img src="images/logo1.png" alt="Client 1" />
+    <img src="images/logo2.png" alt="Client 2" />
+    <img src="images/logo3.png" alt="Client 3" />
+    <img src="images/logo4.png" alt="Client 4" />
+    <img src="images/logo5.png" alt="Client 1" />
+    <img src="images/logo6.png" alt="Client 2" />
+    <img src="images/logo7.png" alt="Client 3" />
+    <img src="images/logo8.png" alt="Client 4" />
+    <img src="images/logo9.png" alt="Client 4" />
+    <img src="images/logo10.png" alt="Client 4" />
+    <img src="images/logo11.png" alt="Client 4" />
+    <img src="images/logo12.png" alt="Client 4" />
+    <img src="images/logo13.png" alt="Client 4" />
+    <img src="images/logo14.png" alt="Client 4" />
+    <img src="images/logo15.png" alt="Client 4" />
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Column 1: Logo & About -->
+      <div class="footer-col about">
+        <img src="images/MEDIA_5_logo-2.png" alt="media 5 Logo" width="200px">
+        <p>Your creative partner in digital media and design solutions.</p>
+        <p>&copy; 2025 Media5. All rights reserved.</p>
+      </div>
+  
+      <!-- Column 2: Quick Links -->
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+  
+      <!-- Column 3: Contact Info -->
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Kampala, Nasser Road | Digital Complex | Level 2 – Suite S-94</li>
+          <li><i class="fas fa-phone-alt"></i> <a href="tel:+256773419980">+256 773 419980</a> | <a href="tel:+256704907671">+256 704 907671</a></li>
+          <li><i class="fas fa-envelope"></i> <a href="mailto:media5fiveug@gmail.com">media5fiveug@gmail.com</a></li>
+      </ul>
+      </div>
+  
+      <!-- Column 4: Social Media -->
+      <div class="footer-col">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://facebook.com/media5avenue" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://instagram.com/media5avenue" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://linkedin.com/company/media5avenue" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://twitter.com/media5avenue" target="_blank"><i class="fab fa-twitter"></i></a>
+           <a href="https://youtube.com/@media5avenue" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+  
+    
+  </footer>
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
